@@ -1,0 +1,96 @@
+********** 장비 - 무기 테이블 삭제
+DROP TABLE t_equipment_weapon;
+
+********** 장비 - 무기 테이블 추가
+CREATE TABLE t_equipment_weapon
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  attack_types VARCHAR(50)[] NOT NULL,
+  weapon_type VARCHAR(50) NOT NULL,
+  skill_id INTEGER references t_skill(id),
+  req_status_str INTEGER,
+  req_status_dex INTEGER,
+  req_status_int INTEGER,
+  req_status_faith INTEGER,
+  req_status_arc INTEGER,
+  damage_physics INTEGER,
+  damage_magic INTEGER,
+  damage_fire INTEGER,
+  damage_thunder INTEGER,
+  damage_divinity INTEGER,
+  damage_critical INTEGER,
+  side_effect_corruption INTEGER,
+  side_effect_frozon INTEGER,
+  side_effect_bleeding INTEGER,
+  side_effect_poison INTEGER,
+  special_function VARCHAR(355),
+  memo VARCHAR(355),
+  create_time TIMESTAMP NOT NULL
+);
+
+CREATE INDEX idx_skill_id ON t_skill (id);
+
+
+
+********** 전회 테이블 삭제
+DROP TABLE t_skill;
+
+********** 전회 테이블 추가
+CREATE TABLE t_skill
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  deterioration_type VARCHAR(50),
+  available_weapon_category VARCHAR(50)[],
+  description TEXT,
+  memo TEXT,
+  create_time TIMESTAMP NOT NULL
+);
+
+
+
+
+********** 기도 테이블 삭제
+DROP TABLE t_pray;
+
+********** 기도 테이블 추가
+CREATE TABLE t_pray
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  consume_fp INTEGER,
+  use_slot INTEGER,
+  req_status_str INTEGER,
+  req_status_dex INTEGER,
+  req_status_int INTEGER,
+  req_status_faith INTEGER,
+  req_status_arc INTEGER,
+  description TEXT,
+  memo TEXT,
+  create_time TIMESTAMP NOT NULL
+);
+
+
+
+
+********** 마술 테이블 삭제
+DROP TABLE t_magic;
+
+********** 마술 테이블 추가
+CREATE TABLE t_magic
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  consume_fp INTEGER,
+  use_slot INTEGER,
+  req_status_str INTEGER,
+  req_status_dex INTEGER,
+  req_status_int INTEGER,
+  req_status_faith INTEGER,
+  req_status_arc INTEGER,
+  description TEXT,
+  memo TEXT,
+  create_time TIMESTAMP NOT NULL
+);
